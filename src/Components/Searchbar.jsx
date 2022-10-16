@@ -1,16 +1,39 @@
-import React from 'react'
+import { useState } from 'react'
 import './Searchbar.css'
+import SearchIcon from '@mui/icons-material/Search';
 
 const Searchbar = ({placeholder, data}) => {
+  const [filteredData, setFilteredData] = useState([])
+
+  const handleFilter = (e) => {
+    const searchWord = e.target.value
+    const newFilter = data.filter((value) => {
+      return value.title.toLowerCase().includes(searchWord.toLowerCase())
+    })
+    setFilteredData(newFilter)
+  }
+
   return (
     <div className='search'>
       <div className="searchInputs">
-        <input type="text" placeholder={placeholder}/>
-        <div className='searchIcon'></div>
+        <input type="text" placeholder={placeholder} onChange={handleFilter}/>
+        <div className='searchIcon'>
+          <SearchIcon />
+        </div>
       </div>
-      <div className="dataResults">
-
-      </div>
+      { filteredData.length != 0 && (
+       <div className="dataResult">
+          {filteredData.map((value, key) => {
+            return (
+              <a className='dataItem' href='#'> 
+                <p>{value.title}</p> 
+              </a>
+            )
+          })}
+        </div> 
+        )
+      }
+      
     </div>
   )
 }
