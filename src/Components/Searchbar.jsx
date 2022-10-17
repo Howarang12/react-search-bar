@@ -36,7 +36,7 @@ const Searchbar = ({placeholder, data}) => {
           onChange={handleFilter}
         />
         <div className='searchIcon'>
-          {filteredData.length === 0 ? (<SearchIcon />) : 
+          {wordEntered.length === 0 ? (<SearchIcon />) : 
           (<CloseIcon id='clearBtn' onClick={clearInput}/>)}
         </div>
       </div>
